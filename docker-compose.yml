@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  funnybot:
+    image: funnybot
+    container_name: funnybotcontainer
+    build: ./
+
+networks:
+  default:
+    driver: bridge
