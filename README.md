@@ -8,10 +8,39 @@ Funnybot - для получения развлекательного мульт
 - Стихов - в разработке
 - Видео - в разработке
 
-### 1. Бот используется API:
+### 1. Бот развернут в Docker контейнере на VPS sweb.ru
+Сайт https://sweb.ru/
+
+Команды развертывания и запуска:
+
+Local
+```bash
+docker ps -a
+docker images
+
+docker tag funnybot:latest jrush/funnybot:latest
+docker push jrush/funnybot:latest
+```
+Remote
+```bash
+sudo apt update
+sudo apt install docker.io
+
+sudo systemctl status docker
+sudo systemctl start docker
+
+sudo docker login
+
+docker pull jrush/funnybot:latest
+docker run -d -p 8080:80 --name funnybot jrush/funnybot:latest
+
+docker stop funnybot
+```
+
+### 2. Бот используется API:
 https://api.thecatapi.com/
 
-### 2. Запуск бота
+### 3. Запуск бота (локально)
 2.1. Клонируем проект:
 
 ```bash
@@ -36,12 +65,10 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-2.5. В консоле импортируем токены для ЯндексюПрактикум и для Телеграмм:
+2.5. В консоле импортируем токены для Телеграмм:
 
 ```bash
-export PRACTICUM_TOKEN=<PRACTICUM_TOKEN>
 export TELEGRAM_TOKEN=<TELEGRAM_TOKEN>
-export CHAT_ID=<CHAT_ID>
 ```
 
 2.5. Запускаем бота
