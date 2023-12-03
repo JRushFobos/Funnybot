@@ -3,7 +3,10 @@ import os
 
 from dotenv import load_dotenv
 
-from telegram.ext import CommandHandler, Updater, CallbackQueryHandler, ConversationHandler
+from telegram.ext import (Updater,
+                          CommandHandler,
+                          CallbackQueryHandler,
+                          ConversationHandler)
 from telegram import InlineKeyboardMarkup
 
 import api_requests
