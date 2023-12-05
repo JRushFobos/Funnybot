@@ -19,13 +19,15 @@ if response.status_code == 200:
     image = Image.open(BytesIO(response.content))
 
     max_size = 800
+    # Изменение размера с сохранением пропорций
+    # Image.LANCZOS с сохранением деталей и гладкости краев
     image.thumbnail((max_size, max_size), Image.LANCZOS)
 
-    temp_image_path = "temp_image.jpg"
-    image.save(temp_image_path)
+    with BytesIO() as output:  # открываем байтовый поток
+        image.save(output, format='JPEG')  # байтовый поток в JPEG формате
+        output.seek(0)  # Переходим на начало потока данных
+        resized_image = output.read()  # Читаем поток в файл
 
-    with open(temp_image_path, 'rb') as photo:
-        bot.send_photo(chat_id=chat_id, photo=photo)
-    os.remove(temp_image_path)
+    bot.send_photo(chat_id=chat_id, photo=resized_image)
 else:
     print("Не удалось загрузить изображение")
