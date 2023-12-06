@@ -65,21 +65,6 @@ def pictures_menu(update, context):
     query.message.reply_text(
         "Выберите категорию картинок:", reply_markup=keyboard)
 
-    # if query.data == "new_cat":
-    #     photo = api_requests.get_new_image_cat()
-    #     query.message.reply_photo(photo)
-    #     return PICTURES
-    # elif query.data == "new_dog":
-    #     photo = api_requests.get_new_image_dog()
-    #     query.message.reply_photo(photo)
-    #     return PICTURES
-    # elif query.data == "random":
-    #     photo = api_requests.new_random()
-    #     query.message.reply_photo(photo)
-    #     return PICTURES
-    # elif query.data == "return":
-    #     return main_menu(update, context)
-
 
 def jokes_menu(update, context):
     pass
@@ -116,6 +101,10 @@ def main():
         api_requests.new_cat, pattern='new_cat'))
     dp.add_handler(CallbackQueryHandler(
         api_requests.new_dog, pattern='new_dog'))
+    dp.add_handler(CallbackQueryHandler(
+        api_requests.new_game, pattern='new_game'))
+    dp.add_handler(CallbackQueryHandler(
+        api_requests.new_nature, pattern='new_nature'))
     dp.add_handler(CallbackQueryHandler(
         api_requests.new_random, pattern='random'))
     dp.add_handler(CallbackQueryHandler(

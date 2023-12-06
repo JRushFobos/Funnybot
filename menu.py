@@ -20,9 +20,10 @@ pictures_buttons = [
     [
         InlineKeyboardButton("🐈 Новая кошка", callback_data="new_cat"),
         InlineKeyboardButton("🐕 Новая собака", callback_data="new_dog"),
-
+        InlineKeyboardButton("🎮 Игры", callback_data="new_game"),
     ],
     [
+        InlineKeyboardButton("🌳 Природа", callback_data="new_nature"),
         InlineKeyboardButton("😱 Случайная картинка", callback_data="random"),
         InlineKeyboardButton("Назад", callback_data="return")
     ],
