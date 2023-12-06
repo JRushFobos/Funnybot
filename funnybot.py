@@ -11,6 +11,7 @@ from telegram import InlineKeyboardMarkup
 
 import api_requests
 from menu import main_menu_buttons, pictures_buttons
+from urls import URL_cat, URL_dog, URL_random_image
 load_dotenv()
 
 secret_token = os.getenv("TOKEN")
@@ -57,6 +58,7 @@ def main_menu(update, context):
 
 
 def pictures_menu(update, context):
+
     buttons = pictures_buttons
     keyboard = InlineKeyboardMarkup(buttons)
 
@@ -67,11 +69,15 @@ def pictures_menu(update, context):
         "Выберите категорию картинок:", reply_markup=keyboard)
 
     if query.data == "new_cat":
-        photo = api_requests.get_new_image_cat()
+        photo = api_requests.get_new_image_cat(URL_cat)
         query.message.reply_photo(photo)
         return PICTURES
     elif query.data == "new_dog":
-        photo = api_requests.get_new_image_dog()
+        photo = api_requests.get_new_image_dog(URL_dog)
+        query.message.reply_photo(photo)
+        return PICTURES
+    elif query.data == "random":
+        photo = api_requests.new_random(URL_random_image)
         query.message.reply_photo(photo)
         return PICTURES
     elif query.data == "return":
@@ -113,6 +119,8 @@ def main():
         api_requests.new_cat, pattern='new_cat'))
     dp.add_handler(CallbackQueryHandler(
         api_requests.new_dog, pattern='new_dog'))
+    dp.add_handler(CallbackQueryHandler(
+        api_requests.new_random, pattern='random'))
     dp.add_handler(CallbackQueryHandler(
         main_menu, pattern='return'))
 
