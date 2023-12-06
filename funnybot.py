@@ -11,7 +11,6 @@ from telegram import InlineKeyboardMarkup
 
 import api_requests
 from menu import main_menu_buttons, pictures_buttons
-from urls import URL_cat, URL_dog, URL_random_image
 load_dotenv()
 
 secret_token = os.getenv("TOKEN")
@@ -58,9 +57,7 @@ def main_menu(update, context):
 
 
 def pictures_menu(update, context):
-
-    buttons = pictures_buttons
-    keyboard = InlineKeyboardMarkup(buttons)
+    keyboard = InlineKeyboardMarkup(pictures_buttons)
 
     query = update.callback_query
     query.answer()
@@ -68,20 +65,20 @@ def pictures_menu(update, context):
     query.message.reply_text(
         "Выберите категорию картинок:", reply_markup=keyboard)
 
-    if query.data == "new_cat":
-        photo = api_requests.get_new_image_cat(URL_cat)
-        query.message.reply_photo(photo)
-        return PICTURES
-    elif query.data == "new_dog":
-        photo = api_requests.get_new_image_dog(URL_dog)
-        query.message.reply_photo(photo)
-        return PICTURES
-    elif query.data == "random":
-        photo = api_requests.new_random(URL_random_image)
-        query.message.reply_photo(photo)
-        return PICTURES
-    elif query.data == "return":
-        return main_menu(update, context)
+    # if query.data == "new_cat":
+    #     photo = api_requests.get_new_image_cat()
+    #     query.message.reply_photo(photo)
+    #     return PICTURES
+    # elif query.data == "new_dog":
+    #     photo = api_requests.get_new_image_dog()
+    #     query.message.reply_photo(photo)
+    #     return PICTURES
+    # elif query.data == "random":
+    #     photo = api_requests.new_random()
+    #     query.message.reply_photo(photo)
+    #     return PICTURES
+    # elif query.data == "return":
+    #     return main_menu(update, context)
 
 
 def jokes_menu(update, context):
