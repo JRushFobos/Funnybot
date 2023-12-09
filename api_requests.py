@@ -35,18 +35,19 @@ def get_random_image(URL_random_image):
     if response.status_code == 200:
         image_link = response.json().get("urls")["small_s3"]
         response = requests.get(image_link)
-        image = Image.open(BytesIO(response.content))
+        # image = Image.open(BytesIO(response.content))
 
-        max_size = 600
-        # Изменение размера с сохранением пропорций
-        # Image.LANCZOS с сохранением деталей и гладкости краев
-        image.thumbnail((max_size, max_size), Image.LANCZOS)
+        # max_size = 600
+        # # Изменение размера с сохранением пропорций
+        # # Image.LANCZOS с сохранением деталей и гладкости краев
+        # image.thumbnail((max_size, max_size), Image.LANCZOS)
 
-        with BytesIO() as output:  # открываем байтовый поток
-            image.save(output, format='JPEG')  # байтовый поток в JPEG формате
-            output.seek(0)  # Переходим на начало потока данных
-            resized_image = output.read()  # Сохраняем и возвращаем поток в файл
-            return resized_image
+        # with BytesIO() as output:  # открываем байтовый поток
+        #     image.save(output, format='JPEG')  # байтовый поток в JPEG формате
+        #     output.seek(0)  # Переходим на начало потока данных
+        #     resized_image = output.read()  # Сохраняем и возвращаем поток в файл
+        #     return resized_image
+        return response.content
     else:
         print(f"Ошибка статус код: {response.status_code}")
 
@@ -59,18 +60,7 @@ def get_image(url):
         image_link = response.json().get(
             "results")[randon_pack_item]["urls"]["small_s3"]
         response = requests.get(image_link)
-        image = Image.open(BytesIO(response.content))
-
-        max_size = 800
-        # Изменение размера с сохранением пропорций
-        # Image.LANCZOS с сохранением деталей и гладкости краев
-        image.thumbnail((max_size, max_size), Image.LANCZOS)
-
-        with BytesIO() as output:  # открываем байтовый поток
-            image.save(output, format='JPEG')  # байтовый поток в JPEG формате
-            output.seek(0)  # Переходим на начало потока данных
-            resized_image = output.read()  # Сохраняем и возвращаем поток в файл
-            return resized_image
+        return response.content
     else:
         print(f"Ошибка статус код: {response.status_code}")
 
