@@ -1,4 +1,5 @@
 import logging
+import time
 import os
 
 from dotenv import load_dotenv
@@ -7,7 +8,7 @@ from telegram.ext import (Updater,
                           CommandHandler,
                           CallbackQueryHandler,
                           ConversationHandler)
-from telegram import InlineKeyboardMarkup
+import telegram
 
 import api_requests
 from menu import main_menu_buttons, pictures_buttons
@@ -29,7 +30,7 @@ def wake_up(update, context):
 
     # Создание кнопок выбора категории
     buttons = main_menu_buttons
-    keyboard = InlineKeyboardMarkup(buttons)
+    keyboard = telegram.InlineKeyboardMarkup(buttons)
 
     # Отправка сообщения с кнопками выбора категории
     context.bot.send_message(
@@ -45,7 +46,7 @@ def main_menu(update, context):
 
     # Создание кнопок выбора категории
     buttons = main_menu_buttons
-    keyboard = InlineKeyboardMarkup(buttons)
+    keyboard = telegram.InlineKeyboardMarkup(buttons)
 
     # Отправка сообщения с кнопками выбора категории
     context.bot.send_message(
@@ -57,13 +58,18 @@ def main_menu(update, context):
 
 
 def pictures_menu(update, context):
-    keyboard = InlineKeyboardMarkup(pictures_buttons)
+    keyboard = telegram.InlineKeyboardMarkup(pictures_buttons)
 
     query = update.callback_query
-    query.answer()
-
-    query.message.reply_text(
-        "Выберите категорию картинок:", reply_markup=keyboard)
+    try:
+        query.answer()
+        query.message.reply_text(
+            "Выберите категорию картинок:", reply_markup=keyboard)
+    except telegram.error.BadRequest as error:
+        time.sleep(2)
+        query.answer()
+        query.message.reply_text(
+            "Выберите категорию картинок:", reply_markup=keyboard)
 
 
 def jokes_menu(update, context):

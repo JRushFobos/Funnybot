@@ -33,12 +33,11 @@ def get_new_image_dog(URL_dog):
 def get_random_image(URL_random_image):
     response = requests.get(URL_random_image, headers=unsplash_headers)
     if response.status_code == 200:
-        image_link = response.json()["links"]["download"]
-        response = requests.get(image_link, headers=unsplash_headers)
-
+        image_link = response.json().get("urls")["small_s3"]
+        response = requests.get(image_link)
         image = Image.open(BytesIO(response.content))
 
-        max_size = 800
+        max_size = 600
         # Изменение размера с сохранением пропорций
         # Image.LANCZOS с сохранением деталей и гладкости краев
         image.thumbnail((max_size, max_size), Image.LANCZOS)
@@ -55,9 +54,10 @@ def get_random_image(URL_random_image):
 def get_image(url):
     response = requests.get(url, headers=unsplash_headers)
     count_images = len(response.json().get("results"))
-    if response.status_code == 200:
+    if response.status_code == 200 and count_images > 0:
+        randon_pack_item = randint(0, count_images-1)
         image_link = response.json().get(
-            "results")[randint(0, count_images)]["links"]["download"]
+            "results")[randon_pack_item]["urls"]["small_s3"]
         response = requests.get(image_link)
         image = Image.open(BytesIO(response.content))
 
