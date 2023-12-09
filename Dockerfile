@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .
 
-CMD python funnybot.py
+RUN ["/bin/bash"]
