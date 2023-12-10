@@ -3,7 +3,7 @@ version: '3'
 services:
   funnybot:
     env_file: .env
-    image: jrush/funnybot:1.2.2
+    image: jrush/funnybot
     container_name: funnybotcontainer
     build: ./
     ports:
