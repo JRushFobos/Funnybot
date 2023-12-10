@@ -3,7 +3,7 @@ name: Main Funnybot workflow
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build_funnybot_and_push_to_docker_hub:
