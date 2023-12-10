@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  funnybot:
+    env_file: .env
+    image: jrush/funnybot:1.2.2
+    container_name: funnybotcontainer
+    build: ./
+    ports:
+      - 8080:80
+
+networks:
+  default:
+    driver: bridge
