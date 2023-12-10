@@ -5,6 +5,7 @@ on:
     branches:
       - master
 
+
 jobs:
   build_funnybot_and_push_to_docker_hub:
     name: Push Docker image to DockerHub
