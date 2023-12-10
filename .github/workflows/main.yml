@@ -1,6 +1,5 @@
 name: Main Funnybot workflow
 
-
 on:
   push:
     branches:
