@@ -52,7 +52,7 @@ https://api.thecatapi.com/
 git clone https://github.com/JRushFobos/Funnybot.git
 ```
 
-5.5. Устанавливаем виртуальное окружение
+5.2. Устанавливаем виртуальное окружение
 
 ```bash
 python -m venv venv
