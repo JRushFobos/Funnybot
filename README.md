@@ -44,6 +44,8 @@ docker stop funnybot
 
 ### 3. Бот используется API:
 https://api.thecatapi.com/
+https://api.unsplash.com
+
 
 ### 4. Запуск бота (локально)
 4.1. Клонируем проект:
@@ -70,13 +72,7 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-4.5. В консоле импортируем токены для Телеграмм:
-
-```bash
-export TELEGRAM_TOKEN=<TELEGRAM_TOKEN>
-```
-
-4.6. Запускаем бота
+4.5. Запускаем бота
 
 ```bash
 python funnybot.py

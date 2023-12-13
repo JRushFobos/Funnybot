@@ -18,8 +18,8 @@ main_menu_buttons = [
 
 pictures_buttons = [
     [
-        InlineKeyboardButton("🐈 Новая кошка", callback_data="new_cat"),
-        InlineKeyboardButton("🐕 Новая собака", callback_data="new_dog"),
+        InlineKeyboardButton("🐈 Кошки", callback_data="new_cat"),
+        InlineKeyboardButton("🐕 Собаки", callback_data="new_dog"),
         InlineKeyboardButton("🎮 Игры", callback_data="new_game"),
     ],
     [
