@@ -24,7 +24,7 @@ pictures_buttons = [
     ],
     [
         InlineKeyboardButton("🌳 Природа", callback_data="new_nature"),
-        InlineKeyboardButton("😱 Случайная картинка", callback_data="random"),
+        InlineKeyboardButton("😱 Случайная", callback_data="random"),
         InlineKeyboardButton("Назад", callback_data="return")
     ],
 ]
