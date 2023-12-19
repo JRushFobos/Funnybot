@@ -11,12 +11,14 @@ from telegram.ext import (Updater,
 import telegram
 
 import api_requests
-from menu import main_menu_buttons, pictures_buttons
+from menu import main_menu_buttons, pictures_buttons, jokes_buttons
 load_dotenv()
 
 secret_token = os.getenv("TOKEN")
+
 MAIN = 1
 PICTURES = 2
+JOKES = 3
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -73,7 +75,11 @@ def pictures_menu(update, context):
 
 
 def jokes_menu(update, context):
-    pass
+    keyboard = telegram.InlineKeyboardMarkup(jokes_buttons)
+    query = update.callback_query
+    query.answer()
+    query.message.reply_text(
+        "Выберите категорию:", reply_markup=keyboard)
 
 
 def verse_menu(update, context):
@@ -98,8 +104,11 @@ def main():
         entry_points=[CommandHandler('start', wake_up)],
         states={
             PICTURES: [CallbackQueryHandler(main_menu, pattern='return')],
+            JOKES: [CallbackQueryHandler(main_menu, pattern='return')],
             MAIN: [CallbackQueryHandler(
-                pictures_menu, pattern='pictures')]
+                pictures_menu, pattern='pictures'),
+                CallbackQueryHandler(
+                jokes_menu, pattern='jokes')],
         },
         fallbacks=[],
     )
@@ -111,6 +120,8 @@ def main():
         api_requests.new_game, pattern='new_game'))
     dp.add_handler(CallbackQueryHandler(
         api_requests.new_nature, pattern='new_nature'))
+    dp.add_handler(CallbackQueryHandler(
+        api_requests.new_anek, pattern='new_anek'))
     dp.add_handler(CallbackQueryHandler(
         api_requests.new_random, pattern='random'))
     dp.add_handler(CallbackQueryHandler(

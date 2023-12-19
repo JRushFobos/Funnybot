@@ -9,3 +9,5 @@ URL_games_image = ("https://api.unsplash.com/search/photos"
 
 URL_nature_image = ("https://api.unsplash.com/search/photos"
                     f"?query=nature&page={randint(1,334)}&per_page=30")
+
+URL_anek = 'https://anekdotbar.ru/top-100.html'

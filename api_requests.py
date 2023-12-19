@@ -1,15 +1,14 @@
 import os
 import requests
 
-from PIL import Image
-from io import BytesIO
-from telegram import Bot
-from random import randint
+import random
+from bs4 import BeautifulSoup as bs
 from dotenv import load_dotenv
 
 from urls import (URL_cat, URL_dog, URL_random_image,
-                  URL_games_image, URL_nature_image)
-from funnybot import pictures_menu, PICTURES, MAIN
+                  URL_games_image, URL_nature_image, URL_anek)
+from funnybot import pictures_menu, jokes_menu, PICTURES, JOKES
+
 
 
 load_dotenv()
@@ -51,12 +50,21 @@ def get_random_image(URL_random_image):
     else:
         print(f"Ошибка статус код: {response.status_code}")
 
+def get_anek(URL_anek):
+    response = requests.get(URL_anek)
+    soup = bs(response.text, 'html.parser')
+    # Находим все анегдоты(с тегами)
+    anekpots = soup.find_all('div', class_='tecst')
+    # Убираем теги пробелы и лишние символы переноса
+    clear_anekdots = [anek.text.split('\n+')[0] for anek in anekpots]
+    random.shuffle(clear_anekdots)
+    return clear_anekdots[0]
 
 def get_image(url):
     response = requests.get(url, headers=unsplash_headers)
     count_images = len(response.json().get("results"))
     if response.status_code == 200 and count_images > 0:
-        randon_pack_item = randint(0, count_images-1)
+        randon_pack_item = random.randint(0, count_images-1)
         image_link = response.json().get(
             "results")[randon_pack_item]["urls"]["small_s3"]
         response = requests.get(image_link)
@@ -64,6 +72,15 @@ def get_image(url):
     else:
         print(f"Ошибка статус код: {response.status_code}")
 
+def get_anek(URL_anek):
+    response = requests.get(URL_anek)
+    soup = bs(response.text, 'html.parser')
+    # Находим все анегдоты(с тегами)
+    anekpots = soup.find_all('div', class_='tecst')
+    # Убираем теги пробелы и лишние символы переноса
+    clear_anekdots = [anek.text.split('\n+')[0] for anek in anekpots]
+    random.shuffle(clear_anekdots)
+    return clear_anekdots[0]
 
 def new_cat(update, context):
     chat = update.effective_chat
@@ -98,3 +115,9 @@ def new_nature(update, context):
     context.bot.send_photo(chat.id, get_image(URL_nature_image))
     pictures_menu(update, context)
     return PICTURES
+
+def new_anek(update, context):
+    chat = update.effective_chat
+    context.bot.send_message(chat_id=chat.id, text=get_anek(URL_anek))
+    jokes_menu(update, context)
+    return JOKES

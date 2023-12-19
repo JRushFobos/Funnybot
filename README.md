@@ -4,7 +4,7 @@
 Funnybot - для получения развлекательного мультимедиа контента
 
 - Картинки
-- Анегдоты - в разработке
+- Анекдоты
 - Стихи - в разработке
 - Видео - в разработке
 
@@ -41,9 +41,10 @@ docker stop funnybot
 ```
 
 
-### 3. Бот используется API:
-https://api.thecatapi.com/
-https://api.unsplash.com
+### 3. Бот использует:
+API https://api.thecatapi.com
+API https://api.unsplash.com
+Сайт https://anekdotbar.ru
 
 
 ### 4. Запуск бота (локально)
