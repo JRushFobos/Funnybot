@@ -5,11 +5,6 @@ import random
 from bs4 import BeautifulSoup as bs
 from dotenv import load_dotenv
 
-from urls import (URL_cat, URL_dog, URL_random_image,
-                  URL_games_image, URL_nature_image, URL_anek)
-from funnybot import pictures_menu, jokes_menu, PICTURES, JOKES
-
-
 
 load_dotenv()
 
@@ -50,15 +45,6 @@ def get_random_image(URL_random_image):
     else:
         print(f"Ошибка статус код: {response.status_code}")
 
-def get_anek(URL_anek):
-    response = requests.get(URL_anek)
-    soup = bs(response.text, 'html.parser')
-    # Находим все анегдоты(с тегами)
-    anekpots = soup.find_all('div', class_='tecst')
-    # Убираем теги пробелы и лишние символы переноса
-    clear_anekdots = [anek.text.split('\n+')[0] for anek in anekpots]
-    random.shuffle(clear_anekdots)
-    return clear_anekdots[0]
 
 def get_image(url):
     response = requests.get(url, headers=unsplash_headers)
@@ -82,42 +68,19 @@ def get_anek(URL_anek):
     random.shuffle(clear_anekdots)
     return clear_anekdots[0]
 
-def new_cat(update, context):
-    chat = update.effective_chat
-    context.bot.send_photo(chat.id, get_new_image_cat(URL_cat))
-    pictures_menu(update, context)
-    return PICTURES
-
-
-def new_dog(update, context):
-    chat = update.effective_chat
-    context.bot.send_photo(chat.id, get_new_image_dog(URL_dog))
-    pictures_menu(update, context)
-    return PICTURES
-
-
-def new_random(update, context):
-    chat = update.effective_chat
-    context.bot.send_photo(chat.id, get_random_image(URL_random_image))
-    pictures_menu(update, context)
-    return PICTURES
-
-
-def new_game(update, context):
-    chat = update.effective_chat
-    context.bot.send_photo(chat.id, get_image(URL_games_image))
-    pictures_menu(update, context)
-    return PICTURES
-
-
-def new_nature(update, context):
-    chat = update.effective_chat
-    context.bot.send_photo(chat.id, get_image(URL_nature_image))
-    pictures_menu(update, context)
-    return PICTURES
-
-def new_anek(update, context):
-    chat = update.effective_chat
-    context.bot.send_message(chat_id=chat.id, text=get_anek(URL_anek))
-    jokes_menu(update, context)
-    return JOKES
+def get_poem(url):
+    response = requests.get(url)
+    soup = bs(response.text, 'html.parser')
+    poems = soup.find_all('li', class_='listing-item')
+    links_poems = []
+    for poem in poems:
+        link = poem.find('a')['href']  # Извлекаем ссылку из тега <a>
+        links_poems.append(link)
+    random.shuffle(links_poems)
+    poem_response = requests.get(links_poems[0])
+    soup = bs(poem_response.text, 'html.parser')
+    poem_title = soup.find('h1', class_='entry-title').get_text(strip=True)
+    text_poems = soup.find('div', class_='entry-content poem-text').get_text()
+    only_text_poem = text_poems.split('Анализ')[0].strip()
+    return (f'{poem_title}\n------------------------------------------------\n'
+            f'{only_text_poem}')
