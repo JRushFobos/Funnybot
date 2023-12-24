@@ -5,7 +5,7 @@ Funnybot - для получения развлекательного мульт
 
 - Картинки
 - Анекдоты
-- Стихи - в разработке
+- Стихи
 - Видео - в разработке
 
 ### 1. Настроен CI/CD на VPS sweb.ru с помощью Git Actions
@@ -44,7 +44,8 @@ docker stop funnybot
 ### 3. Бот использует:
 API https://api.thecatapi.com
 API https://api.unsplash.com
-Сайт https://anekdotbar.ru
+Сайт анегдотов https://anekdotbar.ru
+Сайт стихов https://rustih.ru
 
 
 ### 4. Запуск бота (локально)
