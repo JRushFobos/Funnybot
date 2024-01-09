@@ -4,12 +4,13 @@ import requests
 import random
 from bs4 import BeautifulSoup as bs
 from dotenv import load_dotenv
-
+from googleapiclient.discovery import build
 
 load_dotenv()
 
 unsplash_token = os.getenv("unsplash_token")
 unsplash_headers = {"Authorization": unsplash_token}
+youtube_api_key = os.getenv('youtube_api_key')
 
 
 def get_new_image_cat(URL_cat):
@@ -84,3 +85,20 @@ def get_poem(url):
     only_text_poem = text_poems.split('Анализ')[0].strip()
     return (f'{poem_title}\n------------------------------------------------\n'
             f'{only_text_poem}')
+
+def get_random_video():
+    youtube = build('youtube', 'v3', developerKey=youtube_api_key)
+    request = youtube.search().list(
+    q='юмор',
+    part='snippet',
+    type='video',
+    maxResults=50,
+    videoDuration='short',
+    )
+    response = request.execute()
+    video_links = []
+    for item in response['items']:
+        video_links.append('https://www.youtube.com/shorts/'
+                           f'{item["id"]["videoId"]}')
+    random.shuffle(video_links)
+    return video_links[0]

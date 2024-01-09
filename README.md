@@ -6,7 +6,8 @@ Funnybot - для получения развлекательного мульт
 - Картинки
 - Анекдоты
 - Стихи
-- Видео - в разработке
+- Видео - ссылки на YouTube видео
+- Видео - в формате файлов (в разработке)
 
 ### 1. Настроен CI/CD на VPS sweb.ru с помощью Git Actions
 Телеграм бот автоматически обновляется при обновлении main ветки
@@ -42,10 +43,10 @@ docker stop funnybot
 
 
 ### 3. Бот использует:
-API https://api.thecatapi.com
-API https://api.unsplash.com
-Сайт анегдотов https://anekdotbar.ru
-Сайт стихов https://rustih.ru
+- API https://api.thecatapi.com
+- API https://api.unsplash.com
+- Сайт анекдотов https://anekdotbar.ru
+- Сайт стихов https://rustih.ru
 
 
 ### 4. Запуск бота (локально)

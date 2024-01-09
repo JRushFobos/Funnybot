@@ -14,7 +14,8 @@ import bot_send
 from menu import (main_menu_buttons,
                   pictures_buttons,
                   jokes_buttons,
-                  poems_buttons)
+                  poems_buttons,
+                  video_buttons,)
 
 load_dotenv()
 
@@ -23,6 +24,7 @@ MAIN = 1
 PICTURES = 2
 JOKES = 3
 POEMS = 4
+VIDEO = 5
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -94,7 +96,11 @@ def poems_menu(update, context):
 
 
 def video_menu(update, context):
-    pass
+    keyboard = telegram.InlineKeyboardMarkup(video_buttons)
+    query = update.callback_query
+    query.answer()
+    query.message.reply_text(
+        "Выберите категорию:", reply_markup=keyboard)
 
 
 def reset_conversation(update, context):
@@ -113,12 +119,15 @@ def main():
             PICTURES: [CallbackQueryHandler(main_menu, pattern='return')],
             JOKES: [CallbackQueryHandler(main_menu, pattern='return')],
             POEMS: [CallbackQueryHandler(main_menu, pattern='return')],
+            VIDEO: [CallbackQueryHandler(main_menu, pattern='return')],
             MAIN: [CallbackQueryHandler(
                 pictures_menu, pattern='pictures'),
                 CallbackQueryHandler(
                 jokes_menu, pattern='jokes'),
                 CallbackQueryHandler(
-                poems_menu, pattern='poems')],
+                poems_menu, pattern='poems'),
+                CallbackQueryHandler(
+                video_menu, pattern='video')],
 
         },
         fallbacks=[],
@@ -153,6 +162,8 @@ def main():
         bot_send.new_poem_tolstoy, pattern='Tolstoy'))
     dp.add_handler(CallbackQueryHandler(
         bot_send.new_poem_zhukovskij, pattern='Zhukovskiy'))
+    dp.add_handler(CallbackQueryHandler(
+        bot_send.new_youtube_video, pattern='youtube'))
 
     dp.add_handler(CallbackQueryHandler(
         main_menu, pattern='return'))

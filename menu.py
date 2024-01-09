@@ -66,3 +66,10 @@ poems_buttons = [
         InlineKeyboardButton("🔙 Назад", callback_data="return"),
     ]
 ]
+
+video_buttons = [
+    [
+        InlineKeyboardButton("🤣 YouTube видео", callback_data="youtube"),
+        InlineKeyboardButton("🔙 Назад", callback_data="return"),
+    ],
+]

@@ -5,24 +5,18 @@ from get_content import (get_new_image_cat,
                          get_random_image,
                          get_image,
                          get_anek,
-                         get_poem,)
+                         get_poem,
+                         get_random_video)
 from urls import (URL_cat, URL_dog, URL_random_image,
                   URL_games_image, URL_nature_image, URL_anek, URLs_poems)
 from funnybot import (pictures_menu,
                       jokes_menu,
                       poems_menu,
+                      video_menu,
                       PICTURES,
                       JOKES,
-                      POEMS,)
-
-
-from dotenv import load_dotenv
-
-
-load_dotenv()
-
-unsplash_token = os.getenv("unsplash_token")
-unsplash_headers = {"Authorization": unsplash_token}
+                      POEMS,
+                      VIDEO)
 
 
 def new_cat(update, context):
@@ -118,3 +112,10 @@ def new_poem_zhukovskij(update, context):
     context.bot.send_message(chat.id, get_poem(URLs_poems['Zhukovskij']))
     poems_menu(update, context)
     return POEMS
+
+
+def new_youtube_video(update, context):
+    chat = update.effective_chat
+    context.bot.send_message(chat.id, get_random_video())
+    video_menu(update, context)
+    return VIDEO
