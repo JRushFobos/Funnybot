@@ -1,6 +1,5 @@
 from telegram import InlineKeyboardButton
 
-
 main_menu_buttons = [
     [
         InlineKeyboardButton("🖼️ Картинки", callback_data="pictures"),
@@ -44,15 +43,14 @@ poems_buttons = [
     [
         InlineKeyboardButton("🧓 Иван Крылов", callback_data="Krilov"),
         InlineKeyboardButton("👵 Анна Ахматова", callback_data="Ahmatova"),
-
     ],
     [
         InlineKeyboardButton("🧓 Николай Заболоцкий", callback_data="Zabolockiy"),
-        InlineKeyboardButton("👵 Агния Барто", callback_data="Barto"),],
+        InlineKeyboardButton("👵 Агния Барто", callback_data="Barto"),
+    ],
     [
         InlineKeyboardButton("🧓 Корней Чуковский", callback_data="Chukovskiy"),
         InlineKeyboardButton("🧓 Алексей К. Толстой", callback_data="Tolstoy"),
-
     ],
     [
         InlineKeyboardButton("🧓 Василий Жуковский", callback_data="Zhukovskiy"),
@@ -64,7 +62,7 @@ poems_buttons = [
     ],
     [
         InlineKeyboardButton("🔙 Назад", callback_data="return"),
-    ]
+    ],
 ]
 
 video_buttons = [
