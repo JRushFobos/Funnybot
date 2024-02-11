@@ -114,6 +114,27 @@ def new_poem_zhukovskij(update, context):
     return POEMS
 
 
+def new_poem_pasternak(update, context):
+    chat = update.effective_chat
+    context.bot.send_message(chat.id, get_poem(URLs_poems["Pasternak"]))
+    poems_menu(update, context)
+    return POEMS
+
+
+def new_poem_block(update, context):
+    chat = update.effective_chat
+    context.bot.send_message(chat.id, get_poem(URLs_poems["Block"]))
+    poems_menu(update, context)
+    return POEMS
+
+
+def new_poem_bunin(update, context):
+    chat = update.effective_chat
+    context.bot.send_message(chat.id, get_poem(URLs_poems["Bunin"]))
+    poems_menu(update, context)
+    return POEMS
+
+
 def new_youtube_video(update, context):
     chat = update.effective_chat
     context.bot.send_message(chat.id, get_random_video())

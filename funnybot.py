@@ -147,6 +147,16 @@ def main():
     dp.add_handler(
         CallbackQueryHandler(bot_send.new_poem_zhukovskij, pattern="Zhukovskiy")
     )
+    dp.add_handler(
+        CallbackQueryHandler(bot_send.new_poem_pasternak, pattern="Pasternak")
+    )
+    dp.add_handler(
+        CallbackQueryHandler(bot_send.new_poem_block, pattern="Block")
+    )
+    dp.add_handler(
+        CallbackQueryHandler(bot_send.new_poem_bunin, pattern="Bunin")
+    )
+
     dp.add_handler(CallbackQueryHandler(bot_send.new_youtube_video,
                                         pattern="youtube"))
 

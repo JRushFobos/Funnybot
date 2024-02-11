@@ -54,11 +54,11 @@ poems_buttons = [
     ],
     [
         InlineKeyboardButton("🧓 Василий Жуковский", callback_data="Zhukovskiy"),
-        InlineKeyboardButton("🧓 Корней Чуковский", callback_data="Chukovskiy"),
+        InlineKeyboardButton("🧓 Борис Пастернак", callback_data="Pasternak"),
     ],
     [
-        InlineKeyboardButton("🧓 Алексей К. Толстой", callback_data="Tolstoy"),
-        InlineKeyboardButton("🧓 Василий Жуковский", callback_data="Zhukovskiy"),
+        InlineKeyboardButton("🧓 Александр Блок", callback_data="Block"),
+        InlineKeyboardButton("🧓 Иван Бунин", callback_data="Bunin"),
     ],
     [
         InlineKeyboardButton("🔙 Назад", callback_data="return"),

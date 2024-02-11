@@ -26,4 +26,7 @@ URLs_poems = {
     "Chukovskiy": "https://rustih.ru/vse-stixi-chukovskogo-na-odnoj-stranice/",
     "Tolstoy": "https://rustih.ru/vse-stixi-alekseya-konstantinovicha-tolstogo-na-odnoj-stranice/",
     "Zhukovskij": "https://rustih.ru/vse-stixi-zhukovskogo-na-odnoj-stranice/",
+    "Pasternak":"https://rustih.ru/vse-stixi-pasternaka-na-odnoj-stranice/",
+    "Block":"https://rustih.ru/vse-stixi-bloka-na-odnoj-stranice/",
+    "Bunin":"https://rustih.ru/vse-stixi-bunina-na-odnoj-stranice/",
 }
